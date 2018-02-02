@@ -4,6 +4,7 @@ public class Charla {
 
     private String tema;
     private int duracion;
+    private boolean estaAñadida = false;
 
     public Charla() {
 
@@ -28,5 +29,13 @@ public class Charla {
 
     public void setDuracion(int duracion) {
         this.duracion = duracion;
+    }
+
+    public boolean getIsEstaAñadida() {
+        return estaAñadida;
+    }
+
+    public void setEstaAñadida(boolean estaAñadida) {
+        this.estaAñadida = estaAñadida;
     }
 }

@@ -24,19 +24,8 @@ public class App
             }
         });
 
-        Sesion sesion = new Sesion();
-        LinkedList<Charla> listaCharlaTemp = new LinkedList<>();
-        AtomicInteger duracionSesion = new AtomicInteger();
-        datosOrdenados.forEach(chrl -> {
-            duracionSesion.addAndGet(chrl.getDuracion());
-            sesion.setTiempoMax(Integer.valueOf(String.valueOf(duracionSesion)));
-            if (sesion.getTiempoMax() >= 180) {
-                sesion.setCharla(listaCharlaTemp);
-            }
-            listaCharlaTemp.add(chrl);
-            System.out.println(duracionSesion);
-            //System.out.println(a.getDuracion());
-        });
+
+        ClasificarCharlas(datosOrdenados);
 
         /*leerDatos.temaCharla().forEach(datosEntrada -> {
             System.out.println(datosEntrada.getTema());
@@ -48,5 +37,45 @@ public class App
             System.out.println(charla.getTema());
             System.out.println(charla.getDuracion());
         }*/
+    }
+
+    private static void ClasificarCharlas(LinkedList<Charla> datosOrdenados) {
+        LinkedList<Charla> listaCharlaTemp = new LinkedList<>();
+        LinkedList<Sesion> sesiones = new LinkedList<>();
+        //int duracionSesion = 0;
+        Sesion sesion = new Sesion();
+        /*for (Charla chrl: datosOrdenados) {
+            duracionSesion += (chrl.getDuracion());
+            if (duracionSesion <= 180) {
+                sesion.setCharla(listaCharlaTemp);
+                sesion.setTiempoMax(duracionSesion);
+                listaCharlaTemp.add(chrl);
+            } else {
+
+            }
+
+            System.out.println(duracionSesion);
+        }*/
+        /*datosOrdenados.forEach(chrl -> {
+            duracionSesion.addAndGet(chrl.getDuracion());
+            sesion.setTiempoMax(Integer.valueOf(String.valueOf(duracionSesion)));
+            if (sesion.getTiempoMax() >= 180) {
+                sesion.setCharla(listaCharlaTemp);
+
+            }
+            listaCharlaTemp.add(chrl);
+            System.out.println(duracionSesion);
+            //System.out.println(a.getDuracion());
+        });*/
+        AtomicInteger duracionSesion = new AtomicInteger();
+        datosOrdenados.stream().filter(obj -> obj.getIsEstaAñadida() == false).forEach(chrl -> {
+            duracionSesion.addAndGet(chrl.getDuracion());
+            if (Integer.valueOf(duracionSesion.toString()) <= 180) {
+                listaCharlaTemp.add(chrl);
+                sesion.setCharla(listaCharlaTemp);
+                sesion.setTiempoMax(Integer.valueOf(String.valueOf(duracionSesion)));
+            }
+            System.out.println(duracionSesion);
+        });
     }
 }
