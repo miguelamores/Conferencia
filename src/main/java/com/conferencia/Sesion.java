@@ -1,24 +1,26 @@
 package com.conferencia;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Sesion {
 
-    List<Charla> charla;
+    LinkedList<Charla> charla;
     private int tiempoMax;
 
     public Sesion() {
     }
 
-    public Sesion(List<Charla> charla) {
+    public Sesion(LinkedList<Charla> charla, int tiempoMax) {
         this.charla = charla;
+        this.tiempoMax = tiempoMax;
     }
 
-    public List<Charla> getCharla() {
+    public LinkedList<Charla> getCharla() {
         return charla;
     }
 
-    public void setCharla(List<Charla> charla) {
+    public void setCharla(LinkedList<Charla> charla) {
         this.charla = charla;
     }
 

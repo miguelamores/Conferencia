@@ -1,12 +1,13 @@
 package com.conferencia;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Tematica {
 
-    List<Sesion> sesion;
+    LinkedList<Sesion> sesion;
 
-    public Tematica(List<Sesion> sesion) {
+    public Tematica(LinkedList<Sesion> sesion) {
         this.sesion = sesion;
     }
 
@@ -14,7 +15,7 @@ public class Tematica {
         return sesion;
     }
 
-    public void setSesion(List<Sesion> sesion) {
+    public void setSesion(LinkedList<Sesion> sesion) {
         this.sesion = sesion;
     }
 }
