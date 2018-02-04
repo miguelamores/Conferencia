@@ -1,38 +1,34 @@
 package com.conferencia;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
+import org.junit.Test;
+import static junit.framework.Assert.*;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+public class AppTest {
+
+    LeerDatos leerDatos = new LeerDatos();
+
+    @Test
+    public void ordenarDatosShouldReturnData(){
+        assertNotNull(App.ordenarDatos(leerDatos));
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
+    @Test
+    public void leerDatosAndOrdenarDatosShouldHaveSameSize() {
+        assertEquals(App.ordenarDatos(leerDatos).size(), leerDatos.temaCharla().size());
     }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    @Test
+    public void AnyConferenceShouldBeAtLeast5Minutes() {
+        int duracion = App.ClasificarCharlas(App.ordenarDatos(leerDatos)).get(0).getCharla().get(1).getDuracion();
+        assertTrue(duracion>=5);
     }
+
+    @Test
+    public void TheLastConferenceShouldBeTheNetworkingEvent() {
+        String Event = App.ClasificarCharlas(App.ordenarDatos(leerDatos)).getLast().getCharla().getLast().getTema();
+        assertEquals(Event, "Networking Event");
+    }
+
 }

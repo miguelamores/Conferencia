@@ -17,11 +17,7 @@ public class LeerDatos{
         try (Stream<String> line = Files.lines(Paths.get(CHARLAS))) {
             line.forEach(a -> {
                 String[] b;
-                if(a.matches(".*lightning.*")) {
-                    b = a.replaceAll("lightning", "5min").split("(?=\\d)(?<!\\d)");
-                } else {
-                    b = a.split("(?=\\d)(?<!\\d)");
-                }
+                b = regexLightning(a);
 
                 Charla charla = new Charla();
                 charla.setTema(b[0]);
@@ -36,6 +32,16 @@ public class LeerDatos{
             e.printStackTrace();
         }
         return listaCharlas;
+    }
+
+    public String[] regexLightning(String a) {
+        String[] b;
+        if(a.matches(".*lightning.*")) {
+            b = a.replaceAll("lightning", "5min").split("(?=\\d)(?<!\\d)");
+        } else {
+            b = a.split("(?=\\d)(?<!\\d)");
+        }
+        return b;
     }
 
 }

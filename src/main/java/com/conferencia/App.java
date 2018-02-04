@@ -16,13 +16,7 @@ public class App
         LinkedList<Sesion> sesiones = null;
         LeerDatos leerDatos = new LeerDatos();
 
-        leerDatos.temaCharla().forEach(data -> {
-            if (data.getDuracion() == 5) {
-                datosOrdenados.addLast(data);
-            } else {
-                datosOrdenados.addFirst(data);
-            }
-        });
+        datosOrdenados = ordenarDatos(leerDatos);
 
 
         sesiones = ClasificarCharlas(datosOrdenados);
@@ -52,11 +46,22 @@ public class App
 
     }
 
-    private static LinkedList<Sesion> ClasificarCharlas(LinkedList<Charla> datosOrdenados) {
+    public static LinkedList<Charla> ordenarDatos(LeerDatos leerDatos) {
+        LinkedList<Charla> datosOrdenados = new LinkedList<>();
+        leerDatos.temaCharla().forEach(data -> {
+            if (data.getDuracion() == 5) {
+                datosOrdenados.addLast(data);
+            } else {
+                datosOrdenados.addFirst(data);
+            }
+        });
+        return datosOrdenados;
+    }
+
+    public static LinkedList<Sesion> ClasificarCharlas(LinkedList<Charla> datosOrdenados) {
         LinkedList<Charla> listaCharlaS1 = new LinkedList<>();
         LinkedList<Charla> listaCharlaS2 = new LinkedList<>();
         LinkedList<Sesion> sesiones = new LinkedList<>();
-        int duracionSesion = 0;
         int duracionSesionDia = 0;
         int duracionSesionTarde = 0;
         Sesion sesion = null;
